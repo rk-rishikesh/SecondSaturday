@@ -57,34 +57,19 @@ const EventsPage = () => {
         );
 
   const handleJoinNow = async () => {
-    setIsLoading(true);
     navigate("/dashboard"); // Navigate back to the login page
-
   };
 
   return (
     <>
       {isLoading && <GameLoader />}
 
-      <div className="min-h-screen bg-[#0a0a2a] text-white overflow-hidden relative">
-        <div
-          className="absolute inset-0 opacity-10 pointer-events-none"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 2px)",
-            backgroundSize: "4px 4px",
-          }}
-        />
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-blue-500/20 via-purple-500/50 to-pink-500/20"></div>
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-blue-500/20 via-purple-500/50 to-pink-500/20"></div>
-          <div className="absolute top-0 bottom-0 left-0 w-px bg-gradient-to-b from-blue-500/20 via-purple-500/50 to-pink-500/20"></div>
-          <div className="absolute top-0 bottom-0 right-0 w-px bg-gradient-to-b from-blue-500/20 via-purple-500/50 to-pink-500/20"></div>
-        </div>
+      <div className="min-h-screen bg-blue text-white overflow-hidden relative">
+        <div className="absolute inset-0 opacity-10 pointer-events-none" />
 
         <div className="w-full flex flex-col justify-center items-center relative z-10 px-4 sm:px-6 lg:px-12 py-6 md:py-12">
           <div className="text-center mb-8 md:mb-10">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 mb-4 drop-shadow-[0_0_10px_rgba(99,102,241,0.5)]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-transparent text-white mt-4">
               Dive into the Adventure
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-blue-200 max-w-2xl mx-auto opacity-80">
@@ -92,93 +77,66 @@ const EventsPage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-6">
             {filteredEvents.map((event) => (
-              <div
-                key={event.id}
-                className={`flex max-w-sm flex-col h-full rounded-2xl p-6 relative overflow-hidden border-2 border-transparent ${
-                  event.isActive
-                    ? "bg-gradient-to-tr from-blue-900/70 to-purple-900/70 hover:border-blue-500"
-                    : "bg-gradient-to-tr from-gray-900/70 to-gray-800/70 hover:border-gray-600"
-                } transform transition duration-500 hover:scale-105 hover:shadow-[0_0_25px_rgba(99,102,241,0.3)] group cursor-pointer`}
-              >
-                <div className="absolute top-4 right-4 flex items-center space-x-2">
-                  <span
-                    className={`text-xs font-bold uppercase tracking-wider ${
-                      event.isActive ? "text-green-400" : "text-gray-400"
-                    }`}
-                  >
-                    {event.isActive ? "🎮 Live" : "⏳ Upcoming"}
-                  </span>
-                </div>
-
-                <div className="flex items-center mb-4">
-                  <div className="mr-4 opacity-80 group-hover:opacity-100 transition">
-                    <img
-                      src={event.imgUrl}
-                      alt=""
-                      className="w-20 h-20 rounded-full"
-                    />
-                  </div>
-                  <h2 className="text-lg sm:text-xl font-bold">{event.name}</h2>
-                </div>
-
-                <div className="mb-4 mt-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm text-blue-300">
-                      Registered Participants
-                    </span>
-                    <span className="text-sm font-bold text-blue-200">
-                      {event.participants} / {event.maxParticipants}
-                    </span>
-                  </div>
-                  <div className="w-full bg-blue-900 rounded-full h-2.5">
-                    <div
-                      className="bg-blue-600 h-2.5 rounded-full"
-                      style={{
-                        width: `${
-                          (event.participants / event.maxParticipants) * 100
-                        }%`,
-                      }}
-                    ></div>
-                  </div>
-                </div>
-
-                <p className="text-sm opacity-70 mb-4 flex-grow">
-                  {event.description}
-                </p>
-
-                <div className="mt-auto">
-                  {event.isActive ? (
-                    <button
-                      onClick={() => handleJoinNow()}
-                      className="w-full py-3 rounded-lg bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition group relative overflow-hidden"
-                    >
-                      <span className="relative z-10">Enter</span>
-                      <div className="absolute inset-0 bg-blue-500/30 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                      <span className="ml-2 group-hover:translate-x-1 transition">
-                        →
-                      </span>
-                    </button>
-                  ) : (
-                    <div className="bg-blue-500/10 py-3 rounded-lg text-center">
-                      {event.prize} Coming Soon
+              <div class="flex flex-col border-2 border-black overflow-hidden p-1 rounded-xl shadow-large bg-yellow-200 w-80">
+                <div class="px-0 py-2 sm:p-4 sm:pb-2">
+                  <div class="items-center w-full justify-center grid grid-cols-1 text-left">
+                    <div className="flex items-center mb-4">
+                      <div className="mr-4 opacity-80 group-hover:opacity-100 transition">
+                        <img
+                          src={event.imgUrl}
+                          alt=""
+                          className="w-20 h-20 rounded-full"
+                        />
+                      </div>
+                      <h2 class="text-black font-bold text-lg lg:text-2xl">
+                        {event.name}
+                      </h2>
                     </div>
-                  )}
-                  <div className="mt-1 text-center">
-                    Pool Entry Fee : $ {event.fee}
+                    <div className="mb-4 mt-4 w-full">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm text-gray-600">
+                          Registered Participants
+                        </span>
+                        <span className="text-sm font-bold text-gray-600">
+                          {event.participants} / {event.maxParticipants}
+                        </span>
+                      </div>
+                      <div className="w-full bg-blue-900 rounded-full h-2.5">
+                        <div
+                          className="bg-blue-600 h-2.5 rounded-full"
+                          style={{
+                            width: `${
+                              (event.participants / event.maxParticipants) * 100
+                            }%`,
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                    <div class="mt-2">
+                      <p>
+                        <span class="text-black tracking-tight xl:text-4xl">
+                          $100
+                        </span>
+                        <span class="text-black font-medium text-base">
+                          /player
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col flex-1 justify-between pb-8 px-6 sm:px-8 space-y-6 mt-4">
+                  <div class="flex flex-col gap-3 sm:flex-row">
+                    <a class="text-black items-center inline-flex bg-white border-2 border-black duration-200 ease-in-out focus:outline-none hover:bg-black hover:shadow-none justify-center rounded-xl shadow-[5px_5px_black] text-center transform transition w-full lg:px-8 lg:py-4 lg:text-2xl px-4 py-2">
+                      <button onClick={handleJoinNow}>{event.isActive ? "Enter" : "Register"}</button>
+                    </a>
                   </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-
-        <img
-          src="/images/mono.png"
-          alt="Man Standing"
-          className="absolute bottom-0 left-0 w-[80%] sm:w-80 h-[30rem] sm:h-[48rem] transform scale-1"
-        />
       </div>
     </>
   );
