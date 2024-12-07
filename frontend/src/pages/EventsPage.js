@@ -7,31 +7,34 @@ import { generateChatResponse } from "../function/openai";
 import { ethers } from "ethers";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../data/contractDetails";
 
-const EventsPage = async() => {
+const EventsPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("all");
   const [isLoading, setIsLoading] = useState(false);
-  const [registered, setRegistered] = useState(null);
+  const [group, setGroup] = useState([]);
 
-  const group = []
   useEffect(() => {
-    const registered = fetch(
-      "https://backend-second-saturday.vercel.app/api/thegraph/players-registered"
-    ).then((response) => {
-      if(!response.ok){
-        console.log("ERROR: Failed to load data");
+    const fetchRegisteredPlayers = async () => {
+      try {
+        const response = await fetch(
+          "https://backend-second-saturday.vercel.app/api/thegraph/players-registered"
+        );
+        if (!response.ok) {
+          console.error("ERROR: Failed to load data");
+          return;
+        }
+        const jsonData = await response.json();
+        console.log(jsonData.data.playerRegistered1S);
+        setGroup(jsonData.data.playerRegistered1S);
+      } catch (err) {
+        console.error("ERROR:", err);
       }
-      return response.json();
-    })
-    .then((jsonData) => {
-      setRegistered(jsonData)
-    })
-    .catch((err) => {
-      console.log("ERROR: ", err)
-    });
-  },[])
+    };
+
+    fetchRegisteredPlayers();
+  }, []);
   
   const events = [
     {
@@ -117,11 +120,12 @@ const EventsPage = async() => {
 
         const tx = await contract.register();
         await tx.wait(); // Wait for the transaction to be mined
-        setIsLoading(true);
+        setIsLoading(false);
         navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
       navigate("/dashboard");
     }
   };
@@ -151,9 +155,12 @@ const EventsPage = async() => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-6">
             {filteredEvents.map((event) => (
-              <div class="flex flex-col border-2 border-black overflow-hidden p-1 rounded-xl shadow-large bg-yellow-200 w-80">
-                <div class="px-0 py-2 sm:p-4 sm:pb-2">
-                  <div class="items-center w-full justify-center grid grid-cols-1 text-left">
+              <div
+                key={event.id}
+                className="flex flex-col border-2 border-black overflow-hidden p-1 rounded-xl shadow-large bg-yellow-200 w-80"
+              >
+                <div className="px-0 py-2 sm:p-4 sm:pb-2">
+                  <div className="items-center w-full justify-center grid grid-cols-1 text-left">
                     <div className="flex items-center mb-4">
                       <div className="mr-4 opacity-80 group-hover:opacity-100 transition">
                         <img
@@ -162,7 +169,7 @@ const EventsPage = async() => {
                           className="w-20 h-20 rounded-full"
                         />
                       </div>
-                      <h2 class="text-black font-bold text-lg lg:text-2xl">
+                      <h2 className="text-black font-bold text-lg lg:text-2xl">
                         {event.name}
                       </h2>
                     </div>
@@ -186,25 +193,27 @@ const EventsPage = async() => {
                         ></div>
                       </div>
                     </div>
-                    <div></div>
-                    <div class="mt-2 items-center flex flex-col">
-                      <button class="comic-button h-10 text-xs" onClick={() => setIsOpen(!isOpen)}>
+                    <div className="mt-2 items-center flex flex-col">
+                      <button
+                        className="comic-button h-10 text-xs"
+                        onClick={() => setIsOpen(!isOpen)}
+                      >
                         View List
                       </button>
                       <p className="mt-4">
-                        <span class="text-black tracking-tight xl:text-4xl">
+                        <span className="text-black tracking-tight xl:text-4xl">
                           $100
                         </span>
-                        <span class="text-black font-medium text-base">
+                        <span className="text-black font-medium text-base">
                           /player
                         </span>
                       </p>
                     </div>
                   </div>
                 </div>
-                <div class="flex flex-col flex-1 justify-between pb-8 px-6 sm:px-8 space-y-6 mt-4">
-                  <div class="flex flex-col gap-3 sm:flex-row">
-                    <a class="text-black items-center inline-flex bg-white border-2 border-black duration-200 ease-in-out focus:outline-none hover:bg-black hover:shadow-none justify-center rounded-xl shadow-[5px_5px_black] text-center transform transition w-full lg:px-8 lg:py-4 lg:text-2xl px-4 py-2">
+                <div className="flex flex-col flex-1 justify-between pb-8 px-6 sm:px-8 space-y-6 mt-4">
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <a className="text-black items-center inline-flex bg-white border-2 border-black duration-200 ease-in-out focus:outline-none hover:bg-black hover:shadow-none justify-center rounded-xl shadow-[5px_5px_black] text-center transform transition w-full lg:px-8 lg:py-4 lg:text-2xl px-4 py-2">
                       <button onClick={() => register()}>
                         {event.isActive ? "Enter" : "Register"}
                       </button>
@@ -216,25 +225,37 @@ const EventsPage = async() => {
           </div>
 
           {isOpen && (
-        <div 
-          className="absolute z-10 mt-2 w-full bg-white 
-          border border-gray-200 rounded-lg shadow-lg max-h-64 overflow-y-auto"
-        >
-          {/* Grouped Items */}
-
+            <div
+              ref={dropdownRef}
+              className="absolute z-10 mt-2 w-[100] bg-white 
+              border border-gray-200 rounded-lg shadow-lg max-h-64 overflow-y-auto"
+            >
+              {/* Grouped Items */}
               {group.map((item, itemIndex) => (
-                <div 
+                <div
                   key={itemIndex}
-                  className="px-2 py-1.5 hover:bg-gray-100 
-                  rounded cursor-pointer transition text-sm text-gray-700"
+                  className="px-4 py-2 hover:bg-gray-100 
+                  rounded cursor-pointer transition text-sm text-gray-700 border-b border-gray-200"
                 >
-                  {item}
+                  <p>
+                    <strong>Player:</strong> {item.player}
+                  </p>
+                  <p>
+                    <strong>Transaction Hash:</strong> {item.transactionHash}
+                  </p>
+                  <p>
+                    <strong>Block Number:</strong> {item.blockNumber}
+                  </p>
+                  <p>
+                    <strong>Block Timestamp:</strong>{" "}
+                    {new Date(
+                      parseInt(item.blockTimestamp) * 1000
+                    ).toLocaleString()}
+                  </p>
                 </div>
               ))}
-        
-       
-        </div>
-      )}
+            </div>
+          )}
         </div>
       </div>
     </>
