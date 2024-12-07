@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GameLoader from "./GameLoader";
+import { usePrivy } from '@privy-io/react-auth';
+import { generateChatResponse } from "../function/openai";
 
 const EventsPage = () => {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("all");
   const [isLoading, setIsLoading] = useState(false);
+  const { logout } = usePrivy();
 
   const events = [
     {
@@ -60,12 +63,39 @@ const EventsPage = () => {
     navigate("/dashboard"); // Navigate back to the login page
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
     <>
       {isLoading && <GameLoader />}
 
       <div className="min-h-screen bg-blue text-white overflow-hidden relative">
         <div className="absolute inset-0 opacity-10 pointer-events-none" />
+
+        <div className="absolute top-6 right-6 z-20 flex flex-row gap-4">
+          <button className="group relative flex items-center justify-center overflow-hidden rounded-lg px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg transition-transform duration-200 transform hover:scale-105">
+            <span className="absolute inset-0 bg-black opacity-50 rounded-lg"></span>
+            <span className="spark mask-gradient animate-flip before:animate-rotate absolute inset-0 h-full w-full overflow-hidden rounded-lg [mask:linear-gradient(white,_transparent_50%)] before:absolute before:aspect-square before:w-[200%] before:rotate-[-90deg] before:bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] before:content-[''] before:[inset:0_auto_auto_50%] before:[translate:-50%_-15%]" />
+            <span className="backdrop absolute inset-[1px] rounded-lg bg-black transition-colors duration-200 group-hover:bg-slate-800"></span>
+            <span className="text z-10 text-white font-semibold">
+              Create Event
+            </span>
+          </button>
+
+
+
+          <button onClick={handleLogout} className="group relative flex items-center justify-center overflow-hidden rounded-lg px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg transition-transform duration-200 transform hover:scale-105">
+            <span className="absolute inset-0 bg-black opacity-50 rounded-lg"></span>
+            <span className="spark mask-gradient animate-flip before:animate-rotate absolute inset-0 h-full w-full overflow-hidden rounded-lg [mask:linear-gradient(white,_transparent_50%)] before:absolute before:aspect-square before:w-[200%] before:rotate-[-90deg] before:bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] before:content-[''] before:[inset:0_auto_auto_50%] before:[translate:-50%_-15%]" />
+            <span className="backdrop absolute inset-[1px] rounded-lg bg-black transition-colors duration-200 group-hover:bg-slate-800"></span>
+            <span className="text z-10 text-white font-semibold">
+              Logout
+            </span>
+          </button>
+        </div>
 
         <div className="w-full flex flex-col justify-center items-center relative z-10 px-4 sm:px-6 lg:px-12 py-6 md:py-12">
           <div className="text-center mb-8 md:mb-10">
