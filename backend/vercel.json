@@ -2,21 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend/src/base/register-basename.ts",
+      "src": "dist/index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/register",
-      "dest": "backend/src/base/register-basename.ts"
+      "src": "/(.*)",
+      "dest": "dist/index.js"
     }
-  ],
-  "env": {
-    "BASE_WALLET_PRIVATE_KEY": "@base_wallet_private_key",
-    "CDP_API_KEY_NAME": "@cdp_api_key_name",
-    "CDP_API_KEY_PRIVATE_KEY": "@cdp_api_key_private_key",
-    "OPENAI_API_KEY": "@openai_api_key",
-    "NETWORK_ID": "@network_id"
-  }
+  ]
 }
