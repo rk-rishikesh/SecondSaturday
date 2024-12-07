@@ -1,0 +1,314 @@
+{
+  "Bangalore": [
+    {
+      "type": "Property Card",
+      "description": "Own Marriott Hotel in Indiranagar.",
+      "imgDescription": "A luxurious hotel property in Indiranagar, Bangalore, with a modern architectural style and lush greenery surrounding it."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own a Tech Park in Whitefield.",
+      "imgDescription": "A modern tech park in Whitefield, Bangalore, with sleek glass buildings and a bustling corporate atmosphere."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own Forum Mall in Koramangala.",
+      "imgDescription": "A large, vibrant shopping mall in Koramangala, Bangalore, with bright lights and a lively crowd."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own a luxury villa in Jayanagar.",
+      "imgDescription": "A sprawling luxury villa in Jayanagar, Bangalore, with manicured lawns and an elegant design."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own UB City Mall on MG Road.",
+      "imgDescription": "An upscale mall on MG Road, Bangalore, featuring premium brand stores and sophisticated decor."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught violating a rule! Pay a fine of 200 points.",
+      "imgDescription": "A card showing a policeman handing a ticket to a person near a busy Bangalore street."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught riding without a helmet! Pay a fine of 300 points.",
+      "imgDescription": "A person on a motorbike being stopped by a traffic policeman in Bangalore."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught parking in a no-parking zone! Pay a fine of 150 points.",
+      "imgDescription": "A car being towed from a no-parking zone with a fine notice on the windshield."
+    },
+    {
+      "type": "Skip Card",
+      "description": "Stuck in traffic on MG Road! Skip your turn.",
+      "imgDescription": "A chaotic traffic jam on MG Road, Bangalore, with honking vehicles and frustrated drivers."
+    },
+    {
+      "type": "Rainy Card",
+      "description": "Heavy rains! Pay rent to the nearest property owner for shelter.",
+      "imgDescription": "A rainy street scene in Bangalore with people seeking shelter under umbrellas and awnings."
+    }
+  ],
+  "Mumbai": [
+    {
+      "type": "Property Card",
+      "description": "Own Taj Hotel in Colaba.",
+      "imgDescription": "An iconic view of the Taj Mahal Palace Hotel in Colaba, Mumbai, against the backdrop of the Arabian Sea."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own a seafront apartment in Bandra.",
+      "imgDescription": "A luxurious apartment overlooking the sea in Bandra, Mumbai, with large glass windows and balconies."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own PVR Cinemas in Juhu.",
+      "imgDescription": "A popular cinema in Juhu, Mumbai, bustling with moviegoers and vibrant posters."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own Oberoi Mall in Goregaon.",
+      "imgDescription": "A high-end shopping mall in Goregaon, Mumbai, with elegant interiors and diverse retail outlets."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own a heritage bungalow in Dadar.",
+      "imgDescription": "A charming heritage bungalow in Dadar, Mumbai, with colonial architecture and lush gardens."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught littering at Juhu Beach! Pay a fine of 300 points.",
+      "imgDescription": "A person being fined for littering on Juhu Beach with lifeguards in the background."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught trespassing private property! Pay a fine of 400 points.",
+      "imgDescription": "A person being escorted off a private property by security personnel in Mumbai."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught using a fake ticket on the local train! Pay a fine of 200 points.",
+      "imgDescription": "A crowded Mumbai local train station with ticket inspectors checking passengers."
+    },
+    {
+      "type": "Skip Card",
+      "description": "Stuck in a traffic jam on the Sea Link! Skip your turn.",
+      "imgDescription": "Vehicles stuck on the Bandra-Worli Sea Link during peak hours with a view of the skyline."
+    },
+    {
+      "type": "Festival Card",
+      "description": "Ganesh Chaturthi celebrations! Donate 200 points to charity.",
+      "imgDescription": "A vibrant Ganesh Chaturthi procession in Mumbai with devotees and decorated idols."
+    }
+  ],
+  "Delhi": [
+    {
+      "type": "Property Card",
+      "description": "Own India Gate Gardens in Connaught Place.",
+      "imgDescription": "A scenic view of India Gate surrounded by lush green gardens and bustling visitors in Connaught Place, Delhi."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own a penthouse in South Delhi.",
+      "imgDescription": "An elegant penthouse in South Delhi with a terrace garden and a view of the city skyline."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own DLF Emporio Mall in Vasant Kunj.",
+      "imgDescription": "A luxurious shopping mall in Vasant Kunj, Delhi, with designer stores and sparkling interiors."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own Red Fort in Chandni Chowk.",
+      "imgDescription": "A majestic view of the Red Fort in Chandni Chowk, Delhi, with its iconic red sandstone walls and cultural significance."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own a boutique hotel in Karol Bagh.",
+      "imgDescription": "A charming boutique hotel in Karol Bagh, Delhi, with classic interiors and cozy aesthetics."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught vandalizing a historical monument! Pay a fine of 500 points.",
+      "imgDescription": "A person being fined for graffiti on a wall near a historical site in Delhi."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught jumping the metro gate! Pay a fine of 200 points.",
+      "imgDescription": "A crowded Delhi Metro station with security guards catching a person evading a metro ticket."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught polluting the Yamuna River! Pay a fine of 300 points.",
+      "imgDescription": "A scene of authorities catching someone dumping waste near the Yamuna River in Delhi."
+    },
+    {
+      "type": "Skip Card",
+      "description": "Traffic jam at Rajpath! Skip your turn.",
+      "imgDescription": "A massive traffic jam on Rajpath, Delhi, with honking cars and frustrated drivers."
+    },
+    {
+      "type": "Seasonal Card",
+      "description": "Smog Alert! Donate 200 points to an environmental charity.",
+      "imgDescription": "A hazy morning in Delhi with vehicles and pedestrians moving through thick smog."
+    }
+  ],
+  "Kolkata": [
+    {
+      "type": "Property Card",
+      "description": "Own the iconic Victoria Memorial.",
+      "imgDescription": "A grand view of the Victoria Memorial in Kolkata, surrounded by gardens and reflecting pools."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own a heritage townhouse in Park Street.",
+      "imgDescription": "A colonial-style heritage townhouse in Park Street, Kolkata, with vintage charm and greenery."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own Quest Mall in Ballygunge.",
+      "imgDescription": "A modern shopping mall in Ballygunge, Kolkata, with sleek designs and bustling shoppers."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own Eden Gardens Cricket Stadium.",
+      "imgDescription": "The iconic Eden Gardens cricket stadium in Kolkata, filled with enthusiastic fans and a lively atmosphere."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own a tea estate office in Dalhousie Square.",
+      "imgDescription": "A historical office building in Dalhousie Square, Kolkata, associated with tea estates."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught littering in New Market! Pay a fine of 150 points.",
+      "imgDescription": "A bustling New Market in Kolkata with an officer fining someone for littering."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught stealing books at College Street! Pay a fine of 200 points.",
+      "imgDescription": "College Street in Kolkata with stalls and an individual being fined by a shopkeeper."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught jumping the queue at Howrah Station! Pay a fine of 100 points.",
+      "imgDescription": "Howrah Station's ticket counter with a commotion over someone cutting in line."
+    },
+    {
+      "type": "Skip Card",
+      "description": "Waterlogged streets after a monsoon rain! Skip your turn.",
+      "imgDescription": "Waterlogged streets of Kolkata with people wading through knee-deep water."
+    },
+    {
+      "type": "Festival Card",
+      "description": "Durga Puja celebrations! Donate 300 points to the community pandal.",
+      "imgDescription": "A grand Durga Puja pandal in Kolkata with vibrant decorations and cultural performances."
+    }
+  ],
+  "Chennai": [
+    {
+      "type": "Property Card",
+      "description": "Own Marina Beachside Resort.",
+      "imgDescription": "A luxurious beachside resort overlooking Marina Beach in Chennai, with palm trees and pristine waters."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own Phoenix Marketcity Mall.",
+      "imgDescription": "A bustling shopping mall in Chennai with high-end stores and a lively atmosphere."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own a luxury apartment in Adyar.",
+      "imgDescription": "A high-end apartment complex in Adyar, Chennai, with modern amenities and a view of the Adyar River."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own an IT park in OMR.",
+      "imgDescription": "A sleek IT park in the OMR area of Chennai, surrounded by greenery and bustling with professionals."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own a heritage villa in Mylapore.",
+      "imgDescription": "A traditional South Indian villa in Mylapore, Chennai, with classic architecture and vibrant surroundings."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught littering at Marina Beach! Pay a fine of 250 points.",
+      "imgDescription": "A scenic Marina Beach in Chennai with authorities fining someone for littering."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught speeding on ECR! Pay a fine of 400 points.",
+      "imgDescription": "A police checkpoint on the East Coast Road in Chennai, stopping a speeding vehicle."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught polluting the Adyar River! Pay a fine of 300 points.",
+      "imgDescription": "A scenic view of the Adyar River in Chennai, with a person being fined for dumping waste."
+    },
+    {
+      "type": "Skip Card",
+      "description": "Stuck in traffic on Mount Road! Skip your turn.",
+      "imgDescription": "A busy Mount Road in Chennai with heavy traffic and honking vehicles."
+    },
+    {
+      "type": "Festival Card",
+      "description": "Pongal celebrations! Donate 200 points to local charities.",
+      "imgDescription": "A vibrant Pongal festival scene in Chennai with decorated houses and traditional dishes being prepared."
+    }
+  ],
+  "Hyderabad": [
+    {
+      "type": "Property Card",
+      "description": "Own Charminar Square Market.",
+      "imgDescription": "A bustling square around Charminar in Hyderabad, filled with shops and vibrant crowds."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own a luxury apartment in Jubilee Hills.",
+      "imgDescription": "A high-end apartment in Jubilee Hills, Hyderabad, with modern architecture and panoramic city views."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own Inorbit Mall in Hitech City.",
+      "imgDescription": "A large shopping mall in Hitech City, Hyderabad, with a modern design and busy shoppers."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own an IT park in Madhapur.",
+      "imgDescription": "A modern IT park in Madhapur, Hyderabad, with a futuristic design and a vibrant tech community."
+    },
+    {
+      "type": "Property Card",
+      "description": "Own a palace in Banjara Hills.",
+      "imgDescription": "An opulent palace-like property in Banjara Hills, Hyderabad, with sprawling gardens and luxurious interiors."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught evading tolls! Pay a fine of 200 points.",
+      "imgDescription": "A toll gate on the outskirts of Hyderabad, with officials stopping a vehicle for evasion."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught littering near Charminar! Pay a fine of 150 points.",
+      "imgDescription": "A tourist near Charminar being fined for littering."
+    },
+    {
+      "type": "Jail Card",
+      "description": "Caught trespassing a heritage site! Pay a fine of 300 points.",
+      "imgDescription": "A guard catching someone trespassing near a heritage structure in Hyderabad."
+    },
+    {
+      "type": "Skip Card",
+      "description": "Traffic jam at Necklace Road! Skip your turn.",
+      "imgDescription": "A scenic Necklace Road in Hyderabad with a traffic jam and people strolling nearby."
+    },
+    {
+      "type": "Festival Card",
+      "description": "Bonalu celebrations! Donate 200 points to temple activities.",
+      "imgDescription": "A colorful Bonalu festival celebration in Hyderabad, with traditional dances and offerings at the temple."
+    }
+  ]
+}
