@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAccount } from "wagmi";
-import { Connector, useConnect } from 'wagmi'
+import { Connector, useConnect } from "wagmi";
 
 const LandingPage = ({ setAuthToken, authToken, handleLogout }) => {
   console.log("LoginPage component rendered: ", authToken);
   const navigate = useNavigate();
 
-  const { connectors, connect } = useConnect()
+  const { connect } = useConnect();
   const { isConnected } = useAccount();
-
 
   useEffect(() => {
     console.log(
@@ -17,11 +16,9 @@ const LandingPage = ({ setAuthToken, authToken, handleLogout }) => {
     );
   }, [isConnected]);
 
-
   const onEnter = () => {
     navigate("/events"); // Navigate back to the login page
   };
-
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-gradient-to-b from-black to-gray-900">
@@ -38,15 +35,16 @@ const LandingPage = ({ setAuthToken, authToken, handleLogout }) => {
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white space-y-6">
         <div className="mt-8">
           <div className="inline-flex items-center justify-center ease-in-out hover:scale-105">
-            
-            {!isConnected && <button onClick={() => connect()} class="comic-button">
-              WELCOME TO SECOND SATURDAY
-            </button> }
-            
-            {isConnected && <button onClick={() => onEnter()} class="comic-button">
-              WELCOME TO SECOND SATURDAY
-            </button> }
-            
+            {!isConnected && (
+              <button onClick={() => connect()} class="comic-button">
+                WELCOME TO SECOND SATURDAY
+              </button>
+            )}
+            {isConnected && (
+              <button onClick={() => onEnter()} class="comic-button">
+                WELCOME TO SECOND SATURDAY
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -6,7 +6,8 @@ import carddata from "../data/cards";
 import GameLoader from "./GameLoader";
 import { ethers } from "ethers";
 import { Leaf, Target } from "lucide-react";
-import { useAccount, useEnsName } from "wagmi";
+import { useAccount } from "wagmi";
+import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../data/contractDetails";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
@@ -34,337 +35,15 @@ const DashboardPage = () => {
     setShowLoanCard(!showLoanCard);
   };
 
-  const RPC_URL = "https://base-sepolia.g.alchemy.com/v2/BAdEZyuBRoUZJXxgJpKpe_USdCsARC7I"
-  // const RPC_URL = "https://polygon-amoy.g.alchemy.com/v2/BAdEZyuBRoUZJXxgJpKpe_USdCsARC7I"; 
+  const RPC_URL =
+    "https://base-sepolia.g.alchemy.com/v2/BAdEZyuBRoUZJXxgJpKpe_USdCsARC7I";
+  // const RPC_URL = "https://polygon-amoy.g.alchemy.com/v2/BAdEZyuBRoUZJXxgJpKpe_USdCsARC7I";
   // const RPC_URL = "https://bnb-testnet.g.alchemy.com/v2/BAdEZyuBRoUZJXxgJpKpe_USdCsARC7I"
-  const CONTRACT_ADDRESS = "0xc2e0e1e1Fc70db7bc10A6A237c3A0ad3F38E26Fc"; 
-  const CONTRACT_ABI = [
-    {
-      inputs: [
-        {
-          internalType: "uint256",
-          name: "loanAmount",
-          type: "uint256",
-        },
-      ],
-      name: "getLoan",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          internalType: "uint256",
-          name: "hotspotAmount",
-          type: "uint256",
-        },
-      ],
-      name: "hotspotBenefit",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          internalType: "address",
-          name: "user",
-          type: "address",
-        },
-      ],
-      name: "nextMove",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
-          indexed: true,
-          internalType: "address",
-          name: "player",
-          type: "address",
-        },
-      ],
-      name: "PlayerJailed",
-      type: "event",
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
-          indexed: true,
-          internalType: "address",
-          name: "player",
-          type: "address",
-        },
-      ],
-      name: "PlayerRegistered",
-      type: "event",
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
-          indexed: true,
-          internalType: "address",
-          name: "player",
-          type: "address",
-        },
-      ],
-      name: "PropertiesSeized",
-      type: "event",
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
-          indexed: true,
-          internalType: "address",
-          name: "player",
-          type: "address",
-        },
-        {
-          indexed: false,
-          internalType: "uint256",
-          name: "cardId",
-          type: "uint256",
-        },
-      ],
-      name: "PropertyPurchased",
-      type: "event",
-    },
-    {
-      inputs: [
-        {
-          internalType: "address",
-          name: "user",
-          type: "address",
-        },
-      ],
-      name: "register",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
-          indexed: true,
-          internalType: "address",
-          name: "tenant",
-          type: "address",
-        },
-        {
-          indexed: true,
-          internalType: "address",
-          name: "landlord",
-          type: "address",
-        },
-        {
-          indexed: false,
-          internalType: "uint256",
-          name: "amount",
-          type: "uint256",
-        },
-      ],
-      name: "RentPaid",
-      type: "event",
-    },
-    {
-      inputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
-        },
-      ],
-      name: "gameCards",
-      outputs: [
-        {
-          internalType: "uint256",
-          name: "cardId",
-          type: "uint256",
-        },
-        {
-          internalType: "address",
-          name: "owner",
-          type: "address",
-        },
-        {
-          internalType: "bool",
-          name: "isOwned",
-          type: "bool",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          internalType: "address",
-          name: "playerAddress",
-          type: "address",
-        },
-      ],
-      name: "getPlayerCards",
-      outputs: [
-        {
-          internalType: "uint256[]",
-          name: "",
-          type: "uint256[]",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          internalType: "address",
-          name: "playerAddress",
-          type: "address",
-        },
-      ],
-      name: "getPlayerCurrency",
-      outputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          internalType: "address",
-          name: "playerAddress",
-          type: "address",
-        },
-      ],
-      name: "getPlayerPosition",
-      outputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "JAIL_FINE",
-      outputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "MAX_BOARD_SPACES",
-      outputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          internalType: "address",
-          name: "",
-          type: "address",
-        },
-      ],
-      name: "players",
-      outputs: [
-        {
-          internalType: "address",
-          name: "playerAddress",
-          type: "address",
-        },
-        {
-          internalType: "uint256",
-          name: "currentPosition",
-          type: "uint256",
-        },
-        {
-          internalType: "uint256",
-          name: "currencyPoints",
-          type: "uint256",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "PROPERTY_PRICE",
-      outputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
-        },
-      ],
-      name: "RENT_PRICES",
-      outputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [],
-      name: "STARTING_BALANCE",
-      outputs: [
-        {
-          internalType: "uint256",
-          name: "",
-          type: "uint256",
-        },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-  ];
 
   useEffect(() => {
-    readFromContract()
+    readFromContract();
     setCard(carddata.cards[pos]);
+    setShowCardDetails(true);
   }, []);
 
   useEffect(() => {
@@ -389,65 +68,36 @@ const DashboardPage = () => {
         CONTRACT_ABI,
         provider
       );
-const result = 0 
-      // const result = await contract.getPlayerCurrency("0x7822f606a8F2858235B2833782A15F2690F8Ed03");
-      console.log(address)
-    console.log("Helo : ", result)
-      const pos = await contract.getPlayerPosition(address);
-      setCard(carddata.cards[pos]);
-      console.log(pos)
-      if (result <= 800) {
-        setBank(true);
-      }
-      setPosition(pos);
-      setBal(result);
-      setData(result);
+      const result = await contract.getPlayerCurrency(address);
+      const position = await contract.getPlayerPosition(address);
+      setPosition(position);
+      setBal(result.toLocaleString());
+      setCard(carddata.cards[position]);
     } catch (err) {
       console.error("Error reading from contract:", err);
-      
     } finally {
       setLoading(false);
     }
   };
 
-  
-
   const handleMintCardClick = async () => {
-    const token = localStorage.getItem("authToken");
-    const address = localStorage.getItem("address");
     try {
       setIsLoading(true);
-      const headers = {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      };
-      const response = await fetch(
-        "https://sandbox-api.okto.tech/api/v1/rawtransaction/execute",
-        {
-          method: "POST",
-          headers,
-          body: JSON.stringify({
-            network_name: "POLYGON_TESTNET_AMOY",
-            transaction: {
-              from: address,
-              to: "0xc2e0e1e1Fc70db7bc10A6A237c3A0ad3F38E26Fc",
-              data:
-                "0x55117385000000000000000000000000" +
-                address.toLowerCase().trim().slice(2),
-              value: "0x",
-            },
-          }),
-        }
-      );
+      if (typeof window.ethereum !== "undefined") {
+        setIsLoading(true);
+        await window.ethereum.request({ method: "eth_requestAccounts" });
 
-      // Check if the response is okay (status code 200-299)
-      if (response.ok) {
-        const data = await response.json();
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(
+          CONTRACT_ADDRESS,
+          CONTRACT_ABI,
+          signer
+        );
+
+        const tx = await contract.nextMove();
+        await tx.wait(); // Wait for the transaction to be mined
         setIsLoading(false);
-        // Handle the API response (for example, update state based on the response)
-      } else {
-        setIsLoading(false);
-        console.error("API error:", response.statusText);
       }
     } catch (error) {
       setIsLoading(false);
@@ -619,8 +269,6 @@ const result = 0
     }
   };
 
-
-
   return (
     <div>
       {isLoading && <GameLoader />}
@@ -670,7 +318,9 @@ const result = 0
               Balance
             </h2>
           </div>
-          <ShieldPlus className="text-green-400 animate-pulse" size={28} />
+          <button onClick={readFromContract}>
+            <ShieldPlus className="text-green-400 animate-pulse" size={28} />
+          </button>
         </div>
 
         <div className="flex-grow flex items-center justify-center gap-8">
