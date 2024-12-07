@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin } from "@react-oauth/google";
+import { useAccount } from "wagmi";
+import { Connector, useConnect } from 'wagmi'
 
 const LandingPage = ({ setAuthToken, authToken, handleLogout }) => {
   console.log("LoginPage component rendered: ", authToken);
   const navigate = useNavigate();
 
-  const onLoginClick = async () => {
-        navigate("/events");
+  const { connectors, connect } = useConnect()
+  const { isConnected } = useAccount();
+
+
+  useEffect(() => {
+    console.log(
+      `Current connection status: ${isConnected ? "connected" : "disconnected"}`
+    );
+  }, [isConnected]);
+
+
+  const onEnter = () => {
+    navigate("/events"); // Navigate back to the login page
   };
+
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-gradient-to-b from-black to-gray-900">
@@ -23,24 +36,19 @@ const LandingPage = ({ setAuthToken, authToken, handleLogout }) => {
       </video>
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white space-y-6">
-        <h1 className="text-5xl md:text-6xl font-extrabold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-[#F44336] via-[#ccd8f3] to-[#EF5350] text-shadow-lg">
-          Bull Run
-        </h1>
-        <p className="text-lg md:text-xl font-semibold opacity-90 text-gray-800">
-          Stay Bullish, Play Stylish!
-        </p>
-
-       
-          <div className="mt-8">
-            <div
-              className="inline-flex items-center justify-center bg-gradient-to-r from-[#F44336] via-[#ccd8f3] to-[#EF5350] text-white text-lg font-semibold rounded-xl shadow-xl px-8 py-4 transform transition duration-200 ease-in-out hover:scale-105"
-        
-            >
-              <button onClick={onLoginClick}>Login</button>
-              
-            </div>
+        <div className="mt-8">
+          <div className="inline-flex items-center justify-center ease-in-out hover:scale-105">
+            
+            {!isConnected && <button onClick={() => connect()} class="comic-button">
+              WELCOME TO SECOND SATURDAY
+            </button> }
+            
+            {isConnected && <button onClick={() => onEnter()} class="comic-button">
+              WELCOME TO SECOND SATURDAY
+            </button> }
+            
           </div>
-    
+        </div>
       </div>
     </div>
   );

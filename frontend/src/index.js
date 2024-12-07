@@ -1,18 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { WagmiProvider } from "wagmi";
+import { config } from "./config";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+const root = ReactDOM.createRoot(document.getElementById("root"));
+const queryClient = new QueryClient()
 
 root.render(
   <React.StrictMode>
-    <GoogleOAuthProvider clientId = {GOOGLE_CLIENT_ID}>
-    <App />
-    </GoogleOAuthProvider>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </WagmiProvider>
   </React.StrictMode>
 );
 

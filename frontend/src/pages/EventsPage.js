@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GameLoader from "./GameLoader";
 import { generateChatResponse } from "../function/openai";
-
+import { ethers } from "ethers";
+import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../data/contractDetails";
 const EventsPage = () => {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("all");
@@ -57,12 +58,28 @@ const EventsPage = () => {
           activeFilter === "active" ? event.isActive : !event.isActive
         );
 
-  const handleJoinNow = async () => {
-    navigate("/dashboard"); // Navigate back to the login page
-  };
-
   const handleLogout = () => {
     navigate("/");
+  };
+
+  const register = async () => {
+    if (typeof window.ethereum !== "undefined") {
+      setIsLoading(true)
+      await window.ethereum.request({ method: "eth_requestAccounts" });
+
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(
+        CONTRACT_ADDRESS,
+        CONTRACT_ABI,
+        signer
+      );
+
+      const tx = await contract.register();
+      await tx.wait(); // Wait for the transaction to be mined
+      setIsLoading(true)
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -82,15 +99,14 @@ const EventsPage = () => {
             </span>
           </button>
 
-
-
-          <button onClick={handleLogout} className="group relative flex items-center justify-center overflow-hidden rounded-lg px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg transition-transform duration-200 transform hover:scale-105">
+          <button
+            onClick={handleLogout}
+            className="group relative flex items-center justify-center overflow-hidden rounded-lg px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg transition-transform duration-200 transform hover:scale-105"
+          >
             <span className="absolute inset-0 bg-black opacity-50 rounded-lg"></span>
             <span className="spark mask-gradient animate-flip before:animate-rotate absolute inset-0 h-full w-full overflow-hidden rounded-lg [mask:linear-gradient(white,_transparent_50%)] before:absolute before:aspect-square before:w-[200%] before:rotate-[-90deg] before:bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] before:content-[''] before:[inset:0_auto_auto_50%] before:[translate:-50%_-15%]" />
             <span className="backdrop absolute inset-[1px] rounded-lg bg-black transition-colors duration-200 group-hover:bg-slate-800"></span>
-            <span className="text z-10 text-white font-semibold">
-              Logout
-            </span>
+            <span className="text z-10 text-white font-semibold">Logout</span>
           </button>
         </div>
 
@@ -156,7 +172,9 @@ const EventsPage = () => {
                 <div class="flex flex-col flex-1 justify-between pb-8 px-6 sm:px-8 space-y-6 mt-4">
                   <div class="flex flex-col gap-3 sm:flex-row">
                     <a class="text-black items-center inline-flex bg-white border-2 border-black duration-200 ease-in-out focus:outline-none hover:bg-black hover:shadow-none justify-center rounded-xl shadow-[5px_5px_black] text-center transform transition w-full lg:px-8 lg:py-4 lg:text-2xl px-4 py-2">
-                      <button onClick={handleJoinNow}>{event.isActive ? "Enter" : "Register"}</button>
+                      <button onClick={() => register()}>
+                        {event.isActive ? "Enter" : "Register"}
+                      </button>
                     </a>
                   </div>
                 </div>

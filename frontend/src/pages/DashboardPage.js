@@ -6,6 +6,7 @@ import carddata from "../data/cards";
 import GameLoader from "./GameLoader";
 import { ethers } from "ethers";
 import { Leaf, Target } from "lucide-react";
+import { useAccount, useEnsName } from "wagmi";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
@@ -27,14 +28,16 @@ const DashboardPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showLoanCard, setShowLoanCard] = useState(false);
   const [loan, setLoanAmt] = useState(0);
+  const { address } = useAccount();
 
   const handleLoanClick = () => {
     setShowLoanCard(!showLoanCard);
   };
 
-  const RPC_URL =
-    "https://polygon-amoy.g.alchemy.com/v2/BAdEZyuBRoUZJXxgJpKpe_USdCsARC7I"; // Polygon Mumbai RPC URL from Infura or Alchemy
-  const CONTRACT_ADDRESS = "0xc2e0e1e1Fc70db7bc10A6A237c3A0ad3F38E26Fc"; // Replace with your contract's address
+  const RPC_URL = "https://base-sepolia.g.alchemy.com/v2/BAdEZyuBRoUZJXxgJpKpe_USdCsARC7I"
+  // const RPC_URL = "https://polygon-amoy.g.alchemy.com/v2/BAdEZyuBRoUZJXxgJpKpe_USdCsARC7I"; 
+  // const RPC_URL = "https://bnb-testnet.g.alchemy.com/v2/BAdEZyuBRoUZJXxgJpKpe_USdCsARC7I"
+  const CONTRACT_ADDRESS = "0xc2e0e1e1Fc70db7bc10A6A237c3A0ad3F38E26Fc"; 
   const CONTRACT_ABI = [
     {
       inputs: [
@@ -360,6 +363,7 @@ const DashboardPage = () => {
   ];
 
   useEffect(() => {
+    readFromContract()
     setCard(carddata.cards[pos]);
   }, []);
 
@@ -373,6 +377,40 @@ const DashboardPage = () => {
       setShowMintCard(true);
     }
   }, [remainingTime]);
+
+  const readFromContract = async () => {
+    try {
+      setLoading(true);
+
+      // Connect to the Polygon Mumbai Testnet using ethers
+      const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
+      const contract = new ethers.Contract(
+        CONTRACT_ADDRESS,
+        CONTRACT_ABI,
+        provider
+      );
+const result = 0 
+      // const result = await contract.getPlayerCurrency("0x7822f606a8F2858235B2833782A15F2690F8Ed03");
+      console.log(address)
+    console.log("Helo : ", result)
+      const pos = await contract.getPlayerPosition(address);
+      setCard(carddata.cards[pos]);
+      console.log(pos)
+      if (result <= 800) {
+        setBank(true);
+      }
+      setPosition(pos);
+      setBal(result);
+      setData(result);
+    } catch (err) {
+      console.error("Error reading from contract:", err);
+      
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  
 
   const handleMintCardClick = async () => {
     const token = localStorage.getItem("authToken");
@@ -581,6 +619,8 @@ const DashboardPage = () => {
     }
   };
 
+
+
   return (
     <div>
       {isLoading && <GameLoader />}
@@ -593,14 +633,10 @@ const DashboardPage = () => {
         <div className="flex items-center space-x-4">
           <Leaf className="w-10 h-10 text-green-300 animate-bounce" />
           <div className="flex flex-col">
-            <span className="text-xs uppercase tracking-widest text-green-200 opacity-80">
-              Game Zone Token
-            </span>
             <code className="text-md font-mono bg-green-900/50 px-3 py-2 rounded-md tracking-wider border border-green-600">
-             Wallet Address
+              {address}
             </code>
           </div>
-          <Target className="w-10 h-10 text-lime-400 animate-spin" />
         </div>
         <div className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">
           🎮
@@ -639,9 +675,7 @@ const DashboardPage = () => {
 
         <div className="flex-grow flex items-center justify-center gap-8">
           <div className="bg-indigo-700/50 rounded-lg p-3 w-full text-center relative">
-            <button
-              className="absolute top-2 left-2 text-white hover:bg-indigo-600 rounded-full p-1 transition-colors"
-            ></button>
+            <button className="absolute top-2 left-2 text-white hover:bg-indigo-600 rounded-full p-1 transition-colors"></button>
 
             <span className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-600">
               {bal.toLocaleString()}
@@ -650,9 +684,7 @@ const DashboardPage = () => {
           </div>
 
           <div className="bg-indigo-700/50 rounded-lg p-3 w-full text-center relative">
-            <button
-              className="absolute top-2 left-2 text-white hover:bg-indigo-600 rounded-full p-1 transition-colors"
-            ></button>
+            <button className="absolute top-2 left-2 text-white hover:bg-indigo-600 rounded-full p-1 transition-colors"></button>
 
             <span className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-600">
               {pos.toLocaleString()}

@@ -1,7 +1,12 @@
 import React from "react";
 import { Leaf, Target } from "lucide-react";
+import { useAccount, useEnsName } from 'wagmi'
+
 
 const GamingTokenDisplay = () => {
+
+  const { address } = useAccount()
+
   return (
     <div className="absolute top-4 left-5 bg-gradient-to-br from-green-800 to-emerald-900 text-lime-100 p-4 rounded-xl shadow-lg border-2 border-green-500">
       <div className="flex items-center space-x-4">
@@ -11,7 +16,7 @@ const GamingTokenDisplay = () => {
             Game Zone Token
           </span>
           <code className="text-md font-mono bg-green-900/50 px-3 py-2 rounded-md tracking-wider border border-green-600">
-            0Xhs9nexxxxxxxxxx00
+            {address.data}
           </code>
         </div>
         <Target className="w-10 h-10 text-lime-400 animate-spin" />
