@@ -5,11 +5,14 @@ export function WalletOptions() {
   const { connectors, connect } = useConnect();
 
   return connectors.map((connector) => (
-    <WalletOption
+    <div className="p-2">
+<WalletOption
       key={connector.uid}
       connector={connector}
       onClick={() => connect({ connector })}
     />
+    </div>
+    
   ));
 }
 
@@ -25,7 +28,7 @@ function WalletOption({ connector, onClick }) {
 
   return (
     <button disabled={!ready} onClick={onClick} class="comic-button">
-     WELCOME TO SECOND SATURDAY
+     Login with {connector.name}
     </button>
   );
 }
