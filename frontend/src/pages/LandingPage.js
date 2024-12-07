@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAccount } from "wagmi";
-import { Connector, useConnect } from "wagmi";
+import { injected, useAccount } from "wagmi";
+import { WalletOptions } from './wallet'
 
 const LandingPage = ({ setAuthToken, authToken, handleLogout }) => {
-  console.log("LoginPage component rendered: ", authToken);
-  const navigate = useNavigate();
 
-  const { connect } = useConnect();
+  const navigate = useNavigate();
   const { isConnected } = useAccount();
 
   useEffect(() => {
@@ -15,6 +13,8 @@ const LandingPage = ({ setAuthToken, authToken, handleLogout }) => {
       `Current connection status: ${isConnected ? "connected" : "disconnected"}`
     );
   }, [isConnected]);
+
+
 
   const onEnter = () => {
     navigate("/events"); // Navigate back to the login page
@@ -36,13 +36,14 @@ const LandingPage = ({ setAuthToken, authToken, handleLogout }) => {
         <div className="mt-8">
           <div className="inline-flex items-center justify-center ease-in-out hover:scale-105">
             {!isConnected && (
-              <button onClick={() => connect()} class="comic-button">
-                WELCOME TO SECOND SATURDAY
-              </button>
+              // <button onClick={() => connectWallet()} class="comic-button">
+              //   WELCOME TO SECOND SATURDAY
+              // </button>
+              <WalletOptions/>
             )}
             {isConnected && (
               <button onClick={() => onEnter()} class="comic-button">
-                WELCOME TO SECOND SATURDAY
+                ENTER
               </button>
             )}
           </div>
