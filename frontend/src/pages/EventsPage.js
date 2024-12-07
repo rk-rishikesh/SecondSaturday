@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GameLoader from "./GameLoader";
-import { usePrivy } from '@privy-io/react-auth';
 import { generateChatResponse } from "../function/openai";
 
 const EventsPage = () => {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("all");
   const [isLoading, setIsLoading] = useState(false);
-  const { logout } = usePrivy();
 
   const events = [
     {
@@ -64,7 +62,6 @@ const EventsPage = () => {
   };
 
   const handleLogout = () => {
-    logout();
     navigate("/");
   };
 
