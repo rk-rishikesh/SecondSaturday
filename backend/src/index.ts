@@ -1,6 +1,7 @@
 // Main entry point - Initializes and starts the express server
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import someRoute from './routes/someRoute';
 import attestationRoute from './routes/attestationRoute';
 import basenameRoute from './routes/getBasename';
@@ -16,6 +17,13 @@ app.use(bodyParser.json())
 
 // Middleware to parse JSON
 app.use(express.json());
+
+// Enable CORS for all origins
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Route handling
 app.use('/api', someRoute);
