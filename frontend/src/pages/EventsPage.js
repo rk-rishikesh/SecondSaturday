@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { ChevronDown, ListIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import GameLoader from "./GameLoader";
+
 import { generateChatResponse } from "../function/openai";
 import { ethers } from "ethers";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../data/contractDetails";
 const EventsPage = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("all");
   const [isLoading, setIsLoading] = useState(false);
 
+  const group = []
+  const registered = fetch(
+    "https://backend-second-saturday.vercel.app/api/thegraph/players-registered"
+  );
+  console.log(registered);
   const events = [
     {
       id: 1,
@@ -58,6 +67,21 @@ const EventsPage = () => {
           activeFilter === "active" ? event.isActive : !event.isActive
         );
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+
   const handleLogout = () => {
     navigate("/");
   };
@@ -103,7 +127,7 @@ const EventsPage = () => {
         <div className="w-full flex flex-col justify-center items-center relative z-10 px-4 sm:px-6 lg:px-12 py-6 md:py-12">
           <div className="text-center mb-8 md:mb-10">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-transparent text-white mt-4">
-            Outwit, Outplay, Outlast
+              Outwit, Outplay, Outlast
             </h1>
             {/* <p className="text-base sm:text-lg md:text-xl text-blue-200 max-w-2xl mx-auto opacity-80">
               Outplay, Outscore, and Outshine the Competition!
@@ -149,7 +173,7 @@ const EventsPage = () => {
                     </div>
                     <div></div>
                     <div class="mt-2 items-center flex flex-col">
-                      <button class="comic-button h-10 text-xs">
+                      <button class="comic-button h-10 text-xs" onClick={() => setIsOpen(!isOpen)}>
                         View List
                       </button>
                       <p className="mt-4">
@@ -175,6 +199,27 @@ const EventsPage = () => {
               </div>
             ))}
           </div>
+
+          {isOpen && (
+        <div 
+          className="absolute z-10 mt-2 w-full bg-white 
+          border border-gray-200 rounded-lg shadow-lg max-h-64 overflow-y-auto"
+        >
+          {/* Grouped Items */}
+
+              {group.map((item, itemIndex) => (
+                <div 
+                  key={itemIndex}
+                  className="px-2 py-1.5 hover:bg-gray-100 
+                  rounded cursor-pointer transition text-sm text-gray-700"
+                >
+                  {item}
+                </div>
+              ))}
+        
+       
+        </div>
+      )}
         </div>
       </div>
     </>
@@ -182,3 +227,5 @@ const EventsPage = () => {
 };
 
 export default EventsPage;
+
+
