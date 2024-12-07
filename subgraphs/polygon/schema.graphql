@@ -1,0 +1,137 @@
+type CurrencyChanged @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes! # address
+  amount: BigInt! # int256
+  reason: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type HotspotBenefitReceived @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes! # address
+  benefitAmount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LoanTaken @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes! # address
+  loanAmount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PlayerJailed @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes! # address
+  fine: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PlayerJailed1 @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PlayerPositionChanged @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes! # address
+  oldPosition: BigInt! # uint256
+  newPosition: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PlayerRegistered @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes! # address
+  initialBalance: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PlayerRegistered1 @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PropertiesSeized @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes! # address
+  numberOfPropertiesLost: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PropertiesSeized1 @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PropertyListed @entity(immutable: true) {
+  id: Bytes!
+  cardId: BigInt! # uint256
+  initialPrice: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PropertyPurchased @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes! # address
+  cardId: BigInt! # uint256
+  price: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PropertyPurchased1 @entity(immutable: true) {
+  id: Bytes!
+  player: Bytes! # address
+  cardId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RentPaid @entity(immutable: true) {
+  id: Bytes!
+  tenant: Bytes! # address
+  landlord: Bytes! # address
+  cardId: BigInt! # uint256
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RentPaid1 @entity(immutable: true) {
+  id: Bytes!
+  tenant: Bytes! # address
+  landlord: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
