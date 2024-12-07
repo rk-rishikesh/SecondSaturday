@@ -1,0 +1,68 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: SecondSaturday
+    network: polygon-amoy
+    source:
+      address: "0xEd7000f8e7379c3DABAf938b828D14958C0E1e2E"
+      abi: SecondSaturday
+      startBlock: 15327488
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - CurrencyChanged
+        - HotspotBenefitReceived
+        - LoanTaken
+        - PlayerJailed
+        - PlayerJailed1
+        - PlayerPositionChanged
+        - PlayerRegistered
+        - PlayerRegistered1
+        - PropertiesSeized
+        - PropertiesSeized1
+        - PropertyListed
+        - PropertyPurchased
+        - PropertyPurchased1
+        - RentPaid
+        - RentPaid1
+      abis:
+        - name: SecondSaturday
+          file: ./abis/SecondSaturday.json
+      eventHandlers:
+        - event: CurrencyChanged(indexed address,int256,string)
+          handler: handleCurrencyChanged
+        - event: HotspotBenefitReceived(indexed address,uint256)
+          handler: handleHotspotBenefitReceived
+        - event: LoanTaken(indexed address,uint256)
+          handler: handleLoanTaken
+        - event: PlayerJailed(indexed address,uint256)
+          handler: handlePlayerJailed
+        - event: PlayerJailed(indexed address)
+          handler: handlePlayerJailed1
+        - event: PlayerPositionChanged(indexed address,uint256,uint256)
+          handler: handlePlayerPositionChanged
+        - event: PlayerRegistered(indexed address,uint256)
+          handler: handlePlayerRegistered
+        - event: PlayerRegistered(indexed address)
+          handler: handlePlayerRegistered1
+        - event: PropertiesSeized(indexed address,uint256)
+          handler: handlePropertiesSeized
+        - event: PropertiesSeized(indexed address)
+          handler: handlePropertiesSeized1
+        - event: PropertyListed(uint256,uint256)
+          handler: handlePropertyListed
+        - event: PropertyPurchased(indexed address,uint256,uint256)
+          handler: handlePropertyPurchased
+        - event: PropertyPurchased(indexed address,uint256)
+          handler: handlePropertyPurchased1
+        - event: RentPaid(indexed address,indexed address,uint256,uint256)
+          handler: handleRentPaid
+        - event: RentPaid(indexed address,indexed address,uint256)
+          handler: handleRentPaid1
+      file: ./src/second-saturday.ts

@@ -1,0 +1,8 @@
+{
+  "base-sepolia": {
+    "SecondSaturday": {
+      "address": "0xE53E0a0F8C73DA1CBA15cA1A1CA9d6da451b5412",
+      "startBlock": 18900275
+    }
+  }
+}
