@@ -8,37 +8,29 @@ import * as fs from "fs";
 
 
 async function initializeAgent() {
-    // Initialize LLM
+
     const llm = new ChatOpenAI({
         model: "gpt-4o-mini",
     });
 
-    // ... (existing wallet data handling code) ...
     let walletDataStr: string | null = null;
 
-    // Read existing wallet data if available
+    const WALLET_DATA_FILE = "wallet_data.json";
     if (fs.existsSync(WALLET_DATA_FILE)) {
         try {
             walletDataStr = fs.readFileSync(WALLET_DATA_FILE, "utf8");
         } catch (error) {
             console.error("Error reading wallet data:", error);
-            // Continue without wallet data
+
         }
     }
 
-    // Configure CDP AgentKit
     const config = {
         cdpWalletData: walletDataStr || undefined,
         networkId: process.env.NETWORK_ID || "base-sepolia",
     };
 
-
-    // Initialize CDP AgentKit
     const agentkit = await CdpAgentkit.configureWithWallet(config);
-
-    // ... (existing wallet data saving code) ...
-
-    // Initialize CDP AgentKit Toolkit and get tools
     const cdpToolkit = new CdpToolkit(agentkit);
 
     const dallETool = new DallEAPIWrapper({
