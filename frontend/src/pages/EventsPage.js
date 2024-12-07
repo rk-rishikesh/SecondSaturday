@@ -63,21 +63,26 @@ const EventsPage = () => {
   };
 
   const register = async () => {
-    if (typeof window.ethereum !== "undefined") {
-      setIsLoading(true)
-      await window.ethereum.request({ method: "eth_requestAccounts" });
+    try {
+      if (typeof window.ethereum !== "undefined") {
+        setIsLoading(true);
+        await window.ethereum.request({ method: "eth_requestAccounts" });
 
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(
-        CONTRACT_ADDRESS,
-        CONTRACT_ABI,
-        signer
-      );
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(
+          CONTRACT_ADDRESS,
+          CONTRACT_ABI,
+          signer
+        );
 
-      const tx = await contract.register();
-      await tx.wait(); // Wait for the transaction to be mined
-      setIsLoading(true)
+        const tx = await contract.register();
+        await tx.wait(); // Wait for the transaction to be mined
+        setIsLoading(true);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.log(error);
       navigate("/dashboard");
     }
   };
@@ -90,34 +95,19 @@ const EventsPage = () => {
         <div className="absolute inset-0 opacity-10 pointer-events-none" />
 
         <div className="absolute top-6 right-6 z-20 flex flex-row gap-4">
-          <button className="group relative flex items-center justify-center overflow-hidden rounded-lg px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg transition-transform duration-200 transform hover:scale-105">
-            <span className="absolute inset-0 bg-black opacity-50 rounded-lg"></span>
-            <span className="spark mask-gradient animate-flip before:animate-rotate absolute inset-0 h-full w-full overflow-hidden rounded-lg [mask:linear-gradient(white,_transparent_50%)] before:absolute before:aspect-square before:w-[200%] before:rotate-[-90deg] before:bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] before:content-[''] before:[inset:0_auto_auto_50%] before:[translate:-50%_-15%]" />
-            <span className="backdrop absolute inset-[1px] rounded-lg bg-black transition-colors duration-200 group-hover:bg-slate-800"></span>
-            <span className="text z-10 text-white font-semibold">
-              Create Event
-            </span>
-          </button>
-
-          <button
-            onClick={handleLogout}
-            className="group relative flex items-center justify-center overflow-hidden rounded-lg px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg transition-transform duration-200 transform hover:scale-105"
-          >
-            <span className="absolute inset-0 bg-black opacity-50 rounded-lg"></span>
-            <span className="spark mask-gradient animate-flip before:animate-rotate absolute inset-0 h-full w-full overflow-hidden rounded-lg [mask:linear-gradient(white,_transparent_50%)] before:absolute before:aspect-square before:w-[200%] before:rotate-[-90deg] before:bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] before:content-[''] before:[inset:0_auto_auto_50%] before:[translate:-50%_-15%]" />
-            <span className="backdrop absolute inset-[1px] rounded-lg bg-black transition-colors duration-200 group-hover:bg-slate-800"></span>
-            <span className="text z-10 text-white font-semibold">Logout</span>
+          <button onClick={handleLogout} className="comic-button">
+            <span className="text z-10 font-semibold">Back</span>
           </button>
         </div>
 
         <div className="w-full flex flex-col justify-center items-center relative z-10 px-4 sm:px-6 lg:px-12 py-6 md:py-12">
           <div className="text-center mb-8 md:mb-10">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-transparent text-white mt-4">
-              Dive into the Adventure
+            Outwit, Outplay, Outlast
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-blue-200 max-w-2xl mx-auto opacity-80">
+            {/* <p className="text-base sm:text-lg md:text-xl text-blue-200 max-w-2xl mx-auto opacity-80">
               Outplay, Outscore, and Outshine the Competition!
-            </p>
+            </p> */}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-6">
@@ -157,8 +147,12 @@ const EventsPage = () => {
                         ></div>
                       </div>
                     </div>
-                    <div class="mt-2">
-                      <p>
+                    <div></div>
+                    <div class="mt-2 items-center flex flex-col">
+                      <button class="comic-button h-10 text-xs">
+                        View List
+                      </button>
+                      <p className="mt-4">
                         <span class="text-black tracking-tight xl:text-4xl">
                           $100
                         </span>
