@@ -6,18 +6,33 @@ import GameLoader from "./GameLoader";
 import { generateChatResponse } from "../function/openai";
 import { ethers } from "ethers";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../data/contractDetails";
-const EventsPage = () => {
+
+const EventsPage = async() => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("all");
   const [isLoading, setIsLoading] = useState(false);
+  const [registered, setRegistered] = useState(null);
 
   const group = []
-  const registered = fetch(
-    "https://backend-second-saturday.vercel.app/api/thegraph/players-registered"
-  );
-  console.log(registered);
+  useEffect(() => {
+    const registered = fetch(
+      "https://backend-second-saturday.vercel.app/api/thegraph/players-registered"
+    ).then((response) => {
+      if(!response.ok){
+        console.log("ERROR: Failed to load data");
+      }
+      return response.json();
+    })
+    .then((jsonData) => {
+      setRegistered(jsonData)
+    })
+    .catch((err) => {
+      console.log("ERROR: ", err)
+    });
+  },[])
+  
   const events = [
     {
       id: 1,
