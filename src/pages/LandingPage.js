@@ -1,16 +1,28 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useOkto } from "okto-sdk-react";
 import { GoogleLogin } from "@react-oauth/google";
+import { usePrivy } from '@privy-io/react-auth';
 
 const LandingPage = ({ setAuthToken, authToken, handleLogout }) => {
   console.log("LoginPage component rendered: ", authToken);
   const navigate = useNavigate();
-  const { authenticate } = useOkto();
+  const { login, authenticated, user } = usePrivy();
 
-  const onLoginClick = () => {
-    navigate("/events"); // Navigate back to the login page
+  const onLoginClick = async () => {
+    try {
+      login();
+      if (authenticated) {
+
+        navigate("/events");
+        console.log("USER: ", user)
+        console.log("Get Wallet Object: ", await user.wallet)
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
+
+  console.log("Authenticated:", authenticated);
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-gradient-to-b from-black to-gray-900">
@@ -38,7 +50,7 @@ const LandingPage = ({ setAuthToken, authToken, handleLogout }) => {
               className="inline-flex items-center justify-center bg-gradient-to-r from-[#F44336] via-[#ccd8f3] to-[#EF5350] text-white text-lg font-semibold rounded-xl shadow-xl px-8 py-4 transform transition duration-200 ease-in-out hover:scale-105"
         
             >
-              <button onClick={onLoginClick}>Login</button>
+              <button onClick={onLoginClick}>{authenticated ? "Launch" : "Login"}</button>
               
             </div>
           </div>
